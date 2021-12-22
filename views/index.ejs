@@ -1,0 +1,44 @@
+<%- include('./partials/header'); -%>
+<div class="middle" style="height: 100vh; text-align:center">
+    <h1><%=user.title%></h1>
+    <form action="/weather" method="get">
+        
+        <h2><i class="fas fa-globe"></i>&nbsp;<label for="Location">Enter the location</label></h1>
+            <br>
+            <i style="font-size:25px;" class="fas fa-search-location"></i> &nbsp;
+        <input type="text" id="Location" name="address" placeholder="address">
+     
+        <br><br>
+        <button type="submit" style="background-color: black; color:white; padding:10px;border-radius:5px;border: 0px">Search</button>
+    </form>
+    <%if(user.error!==undefined){%>
+        <hr>
+        <h3><%=user.error%></p>
+            <h1><i style="color:red; font-size: 100px;" class="fas fa-exclamation-triangle"></i></h1>
+    <%}%>
+    <%if(user.display===true){%>
+        <hr>
+     <h1><i style="color:greenyellow;text-shadow: 1px 1px black;" class="fas fa-temperature-low"></i><i class="fas fa-arrow-right" style="font-size: 1rem;"></i>&nbsp;<%=user.temprature%><sup>&deg;</sup>C</h1>
+     <div style="background-color: snow; width:100%; border-top:1px solid rgb(168, 166, 166); border-radius: 20px 20px 0 0;  display: flex;justify-content: space-evenly;">
+        <h3><i style="color:green;text-shadow: 1px 1px black;" class="fas fa-map-marker-alt">&nbsp;</i>&nbsp;<i class="fas fa-arrow-right" style="font-size: 0.5rem;"></i>&nbsp;&nbsp;<%=user.location%></h3>
+     <h3><i style="color:aqua;text-shadow: 1px 1px black;"  class="fas fa-wind"></i>&nbsp;Wind Speed &nbsp;</i>&nbsp;<i class="fas fa-arrow-right" style="font-size: 0.5rem;"></i>&nbsp;&nbsp;<%=user.windSpeed%>KMPH</h3>
+     </div>
+    
+     <div style="background-color: snow; width:100%; border-top:1px solid rgb(168, 166, 166); border-radius: 20px 20px 0 0; display: flex;justify-content: space-evenly;">
+        
+        <%if(user.isDay==='no'){%>
+            <h3><i style="color:gray;text-shadow: 1px 1px black;" class="fas fa-moon"></i>&nbsp;<i class="fas fa-arrow-right" style="font-size: 0.5rem;"></i>&nbsp;&nbsp;Night</h3>
+        <%}else{%>
+            <h3><i style="color:yellow;text-shadow: 1px 1px black;" class="fas fa-cloud-sun"></i>&nbsp;<i class="fas fa-arrow-right" style="font-size: 0.5rem;"></i>&nbsp;&nbsp;Daylight</h3>
+            <%}%>
+     <h3><i style="color:darkblue;text-shadow: 1px 1px black;" class="fas fa-tint"></i>&nbsp;Humidity&nbsp;</i>&nbsp;<i class="fas fa-arrow-right" style="font-size: 0.5rem;"></i>&nbsp;&nbsp;<%=user.humidity%>%</h3>
+     </div>
+     
+     <div style="border-top:1px solid rgb(168, 166, 166); border-radius: 20px 20px 0 0;width:100%">
+         <h3><i style="color:rgb(22, 22, 71);text-shadow: 1px 1px black;" class="fas fa-eye-slash"></i>&nbsp;Visibility&nbsp;<i class="fas fa-arrow-right" style="font-size: 0.5rem;"></i>&nbsp;&nbsp;<%=user.visibility%>Km</h3>
+     </div>
+    <%}%>
+</div>
+
+<script src="./js/app.js"></script>  
+<%- include('./partials/footer',{user:user}); -%>
